@@ -1,70 +1,87 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 public class DataTypeDemonstration {
+
     int instanceInt;
     double instanceDouble;
+
     static String staticString = "This is a static variable.";
+
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         int num1 = 0;
         int num2 = 0;
         boolean validInput = false;
-        System.out.println("--- 1. Primitive Data Types and Memory Usage ---");
-        boolean flag = true;
-        System.out.println("boolean flag: " + flag + " (1 bit)");
-        byte b = 127;
-        System.out.println("byte b: " + b + " (8 bits)");
-        short s = 32000;
-        System.out.println("short s: " + s + " (16 bits)");
-        int i = 2147483647;
-        System.out.println("int i: " + i + " (32 bits)");
-  
-        long l = 9223372036854775807L;
-        System.out.println("long l: " + l + " (64 bits)");
-        float f = 3.14159265f;
-        System.out.println("float f: " + f + " (32 bits)");
-        double d = 3.141592653589793;
-        System.out.println("double d: " + d + " (64 bits)");
-        char c = 'A';
-        System.out.println("char c: " + c + " (16 bits)\n");
 
-        System.out.println("--- 2. & 5. User Input and Error Handling ---");
+        System.out.println("--- Primitive Data Types and Memory Usage ---");
+
+        boolean flag = true;
+        byte b = 127;
+        short s = 32000;
+        int i = 2147483647;
+        long l = 9223372036854775807L;
+        float f = 3.14f;
+        double d = 3.141592653589793;
+        char c = 'A';
+
+        System.out.println("boolean: " + flag + " (1 bit)");
+        System.out.println("byte: " + b + " (8 bits)");
+        System.out.println("short: " + s + " (16 bits)");
+        System.out.println("int: " + i + " (32 bits)");
+        System.out.println("long: " + l + " (64 bits)");
+        System.out.println("float: " + f + " (32 bits)");
+        System.out.println("double: " + d + " (64 bits)");
+        System.out.println("char: " + c + " (16 bits)\n");
+
         while (!validInput) {
             try {
-                System.out.print("Enter the first integer: ");
+                System.out.print("Enter first integer: ");
                 num1 = scanner.nextInt();
-                System.out.print("Enter the second integer: ");
+
+                System.out.print("Enter second integer: ");
                 num2 = scanner.nextInt();
-                validInput = true; // Input was valid, exit loop
+
+                validInput = true;
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please enter only integers.");
-                scanner.next(); // Clear the invalid input from the scanner buffer
+                System.out.println("Invalid input! Enter integers only.");
+                scanner.next();
             }
         }
-        System.out.println("\n--- 3. Basic Arithmetic Operations ---");
+
         int sum = num1 + num2;
-        int difference = num1 - num2;
-        int product = num1 * num2;
+        int diff = num1 - num2;
+        int prod = num1 * num2;
+
         if (num2 != 0) {
-            int quotient = num1 / num2;
-            System.out.printf("Sum: %d | Difference: %d | Product: %d | Quotient: %d%n%n", sum, difference, product, quotient);
+            int div = num1 / num2;
+            System.out.printf("Sum: %d | Difference: %d | Product: %d | Division: %d%n",
+                    sum, diff, prod, div);
         } else {
-            System.out.println("Sum: " + sum + " | Difference: " + difference + " | Product: " + product + " | Cannot divide by zero.");
+            System.out.printf("Sum: %d | Difference: %d | Product: %d | Division not possible%n",
+                    sum, diff, prod);
         }
-        System.out.println("--- 4. Type Casting ---");
+
+        System.out.println("\n--- Type Casting ---");
+
         int intValue = 100;
-        long longValue = intValue; // int (32 bits) fits into long (64 bits) automatically
-        System.out.println("Implicit Cast (int to long): " + longValue);
+        long longValue = intValue;
+        System.out.println("Implicit casting (int to long): " + longValue);
+
         double doubleValue = 123.45;
-        int narrowInt = (int) doubleValue; // double value is truncated to an integer
-        System.out.println("Explicit Cast (double to int): " + narrowInt + " (data loss occurs - decimal part is lost)\n");
-        System.out.println("--- 7. Variable Scopes Demonstration ---");
-        System.out.println("Accessing Static Variable: " + DataTypeDemonstration.staticString);
-        DataTypeDemonstration demoInstance = new DataTypeDemonstration();
-        demoInstance.instanceInt = 5;
-        demoInstance.instanceDouble = 10.5;
-        System.out.println("Accessing Instance Variable (int): " + demoInstance.instanceInt);
-        System.out.println("Accessing Instance Variable (double): " + demoInstance.instanceDouble);
+        int narrowInt = (int) doubleValue;
+        System.out.println("Explicit casting (double to int): " + narrowInt);
+
+        System.out.println("\n--- Variable Scope ---");
+        System.out.println("Static Variable: " + DataTypeDemonstration.staticString);
+
+        DataTypeDemonstration obj = new DataTypeDemonstration();
+        obj.instanceInt = 10;
+        obj.instanceDouble = 20.5;
+
+        System.out.println("Instance Variable int: " + obj.instanceInt);
+        System.out.println("Instance Variable double: " + obj.instanceDouble);
 
         scanner.close();
     }
